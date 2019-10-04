@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/computer"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_devis"
+            android:icon="@drawable/document"
+            android:title="@string/menu_devis" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/user"
+            android:title="@string/menu_profile" />
+        <item
+            android:id="@+id/nav_members"
+            android:icon="@drawable/group"
+            android:title="@string/menu_members" />
+        <item
+            android:id="@+id/nav_apropos"
+            android:icon="@drawable/share"
+            android:title="@string/menu_apropos" />
+    </group>
+
+    <item android:title="Gestion">
+        <menu>
+            <item
+                android:id="@+id/nav_inventory"
+                android:icon="@drawable/list"
+                android:title="@string/menu_inventory" />
+            <item
+                android:id="@+id/nav_management"
+                android:icon="@drawable/settings"
+                android:title="@string/menu_management" />
+        </menu>
+    </item>
+
+</menu>
