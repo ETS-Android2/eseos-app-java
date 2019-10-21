@@ -1,3 +1,7 @@
+//A utiliser pour les requêtes à l'API
+//A moins que vous n'ayez une meilleure solution
+//Solution viable, en attente de l'API de Renan
+/*
 package com.example.eseos;
 
 import android.os.AsyncTask;
@@ -51,3 +55,4 @@ class RetrieveFeedTask extends AsyncTask<Void, Void, String> {
         responseView.setText(response);
     }
 }
+*/

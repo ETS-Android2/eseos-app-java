@@ -1,6 +1,7 @@
 package com.example.eseos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -13,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class ProfileActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,6 +47,18 @@ public class ProfileActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        ImageView profilePicture = (ImageView) findViewById(R.id.imageViewProfilePicture);
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+
+        int dimenProfilePicture = (int) Math.round(pref.getInt("ScreenWidth",0)*0.3);
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(dimenProfilePicture, dimenProfilePicture);
+        layoutParams.setMargins(30,30,30,30);
+        profilePicture.setLayoutParams(layoutParams);
+
+
     }
 
     @Override

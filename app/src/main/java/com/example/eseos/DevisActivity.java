@@ -1,5 +1,6 @@
 package com.example.eseos;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,14 +10,20 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class DevisActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DevisRecyclerViewAdapter devisRecyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +32,56 @@ public class DevisActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
+            @TargetApi(17)
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Création d'un nouveau devis.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
+
+        RecyclerView devisRecycler = (RecyclerView)findViewById(R.id.recycler_view);
+        devisRecycler.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(RecyclerView.VERTICAL);
+        devisRecycler.setLayoutManager(llm);
+        devisRecyclerViewAdapter = new DevisRecyclerViewAdapter(this);
+        devisRecycler.setAdapter(devisRecyclerViewAdapter);
+
+            //TODO : Modifier le mSessionManager avec la liste reçue de notre API
+            //TODO Requête à l'API ESE'OS pour récupérer tous les devis
+
+
+        /*Exemple boucle for
+        for(int i=0;i<mSessionManager.getJuryProjectTitleSize();i++){
+            devisName.add(mSessionManager.getJuryProjectTitle(i));
+         */
+
+            ArrayList<String> devisName = new ArrayList<>();
+        for(int i=0;i<20;i++){
+                devisName.add(Integer.toString(i));
+
+            }
+            ArrayList<String> customerName = new ArrayList<>();
+        for(int i=0;i<20;i++){
+                customerName.add(Integer.toString(i));
+                //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
+            }
+            ArrayList<String> status = new ArrayList<>();
+        for(int i=0;i<20;i++){
+                status.add(Integer.toString(i));
+                //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
+            }
+
+        devisRecyclerViewAdapter.setDevisName(devisName);
+        devisRecyclerViewAdapter.setCustomerName(customerName);
+        devisRecyclerViewAdapter.setState(status);
+        Log.d("TAILLE DES PROJETS JURY",Integer.toString(devisName.size()));
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -43,7 +92,55 @@ public class DevisActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
+
+
+
+    /*@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_devis);
+
+
+        RecyclerView devisRecycler = (RecyclerView)findViewById(R.id.recycler_view);
+        devisRecycler.setHasFixedSize(true);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(RecyclerView.VERTICAL);
+        devisRecycler.setLayoutManager(llm);
+        devisRecyclerViewAdapter = new DevisRecyclerViewAdapter(this);
+        devisRecycler.setAdapter(devisRecyclerViewAdapter);
+
+        //TODO : Modifier le mSessionManager avec la liste reçue de notre API
+
+        /*Exemple boucle for
+        for(int i=0;i<mSessionManager.getJuryProjectTitleSize();i++){
+            devisName.add(mSessionManager.getJuryProjectTitle(i));
+         *
+
+        ArrayList<String> devisName = new ArrayList<>();
+        for(int i=0;i<20;i++){
+            devisName.add(Integer.toString(i));
+
+        }
+        ArrayList<String> customerName = new ArrayList<>();
+        for(int i=0;i<20;i++){
+            customerName.add(Integer.toString(i));
+            //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
+        }
+        ArrayList<String> status = new ArrayList<>();
+        for(int i=0;i<20;i++){
+            status.add(Integer.toString(i));
+            //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
+        }
+
+        devisRecyclerViewAdapter.setDevisName(devisName);
+        devisRecyclerViewAdapter.setCustomerName(customerName);
+        devisRecyclerViewAdapter.setState(status);
+        Log.d("TAILLE DES PROJETS JURY",Integer.toString(devisName.size()));
+
+    }*/
 
     @Override
     public void onBackPressed() {

@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         TextView textOpeningState = findViewById(R.id.textViewOpeningState);
+        //TODO Récupérer la variable dans le SharedPreferences et la remplacer
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
