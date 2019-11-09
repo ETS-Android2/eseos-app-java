@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.apropos.AProposFragment">
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/apropos_text"
+        android:fontFamily="@font/michroma"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+
+        android:layout_margin="20dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true">
+
+    </TextView>
+
+    <TextClock
+        android:id="@+id/textClock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDescription"
+        android:fontFamily="@font/orbitron_medium"
+        android:format24Hour="hh:mm a"
+        android:gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:timeZone="GMT+0100"
+        tools:targetApi="17">
+
+    </TextClock>
+
+</RelativeLayout>

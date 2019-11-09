@@ -10,9 +10,9 @@
             android:icon="@drawable/computer"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_devis"
+            android:id="@+id/nav_client_devis"
             android:icon="@drawable/document"
-            android:title="@string/menu_devis" />
+            android:title="@string/menu_client_devis" />
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/user"
@@ -27,12 +27,26 @@
             android:title="@string/menu_apropos" />
     </group>
 
-    <item android:title="Gestion">
+    <item
+        android:title="Membre"
+        android:id="@+id/menu_member">
         <menu>
             <item
                 android:id="@+id/nav_inventory"
                 android:icon="@drawable/list"
                 android:title="@string/menu_inventory" />
+            <item
+                android:id="@+id/nav_club_devis"
+                android:icon="@drawable/document"
+                android:title="@string/menu_club_devis"/>
+        </menu>
+
+    </item>
+
+    <item
+        android:title="Administrateur"
+        android:id="@+id/menu_admin">
+        <menu>
             <item
                 android:id="@+id/nav_management"
                 android:icon="@drawable/settings"

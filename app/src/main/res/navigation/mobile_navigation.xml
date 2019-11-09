@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.eseos.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_apropos"
+        android:name="com.example.eseos.ui.apropos.AProposFragment"
+        android:label="@string/menu_apropos"
+        tools:layout="@layout/fragment_apropos" />
+
+    <fragment
+        android:id="@+id/nav_client_devis"
+        android:name="com.example.eseos.ui.client_devis.ClientDevisFragment"
+        android:label="@string/menu_client_devis"
+        tools:layout="@layout/fragment_client_devis" />
+
+    <fragment
+        android:id="@+id/nav_club_devis"
+        android:name="com.example.eseos.ui.club_devis.ClubDevisFragment"
+        android:label="@string/menu_club_devis"
+        tools:layout="@layout/fragment_club_devis" />
+
+    <fragment
+        android:id="@+id/nav_inventory"
+        android:name="com.example.eseos.ui.inventory.InventoryFragment"
+        android:label="@string/menu_inventory"
+        tools:layout="@layout/fragment_inventory" />
+
+    <fragment
+        android:id="@+id/nav_management"
+        android:name="com.example.eseos.ui.management.ManagementFragment"
+        android:label="@string/menu_management"
+        tools:layout="@layout/fragment_management" />
+
+    <fragment
+        android:id="@+id/nav_members"
+        android:name="com.example.eseos.ui.members.MembersFragment"
+        android:label="@string/menu_members"
+        tools:layout="@layout/fragment_members" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.eseos.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

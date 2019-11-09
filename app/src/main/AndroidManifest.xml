@@ -13,33 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".HomeActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".DevisActivity"
-            android:label="@string/title_activity_devis"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MembersActivity"
-            android:label="@string/title_activity_members"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AProposActivity"
-            android:label="@string/title_activity_apropos"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".InventoryActivity"
-            android:label="@string/title_activity_inventory"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".ManagementActivity"
-            android:label="@string/title_activity_management"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:name=".DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeScreen">
             <intent-filter>
