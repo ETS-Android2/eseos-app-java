@@ -31,7 +31,7 @@ public class WelcomeScreen extends AppCompatActivity {
         editor.putInt("ScreenHeight",height);
         editor.putInt("ScreenWidth",width);
 
-        editor.commit();
+        editor.apply();
 
 
         new Handler().postDelayed(new Runnable(){

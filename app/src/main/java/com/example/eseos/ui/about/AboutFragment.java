@@ -1,4 +1,4 @@
-package com.example.eseos.ui.apropos;
+package com.example.eseos.ui.about;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -11,17 +11,17 @@ import android.widget.TextClock;
 
 import com.example.eseos.R;
 
-public class AProposFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
-    private AProposViewModel AProposViewModel;
+    private AboutViewModel AboutViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AProposViewModel =
-                ViewModelProviders.of(this).get(AProposViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_apropos, container, false);
+        AboutViewModel =
+                ViewModelProviders.of(this).get(AboutViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_about, container, false);
         /*final TextView textView = root.findViewById(R.id.text_apropos);
-        AProposViewModel.getText().observe(this, new Observer<String>() {
+        AboutViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

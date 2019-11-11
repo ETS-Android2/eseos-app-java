@@ -1,5 +1,6 @@
 package com.example.eseos;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -43,6 +44,26 @@ public class DrawerActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        Menu nav_Menu = navigationView.getMenu();
+
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
+        String rank = pref.getString("rank","0");
+
+        switch (rank) {
+            case "2":
+                nav_Menu.findItem(R.id.menu_member).setVisible(true);
+                nav_Menu.findItem(R.id.menu_admin).setVisible(false);
+                break;
+            case "5":
+                nav_Menu.findItem(R.id.menu_member).setVisible(true);
+                nav_Menu.findItem(R.id.menu_admin).setVisible(true);
+                break;
+            default:
+                nav_Menu.findItem(R.id.menu_member).setVisible(false);
+                nav_Menu.findItem(R.id.menu_admin).setVisible(false);
+                break;
+        }
     }
 
     @Override

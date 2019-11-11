@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background_gradient"
-    tools:context=".ui.apropos.AProposFragment">
+    tools:context=".ui.about.AboutFragment">
 
     <TextView
         android:id="@+id/textViewDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/apropos_text"
+        android:text="@string/about_text"
         android:fontFamily="@font/michroma"
+        app:fontFamily="@font/michroma"
         android:textSize="20sp"
         android:textColor="#ffffff"
 

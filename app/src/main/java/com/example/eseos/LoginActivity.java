@@ -1,11 +1,11 @@
 package com.example.eseos;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,17 +17,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button buttonValidate = (Button) findViewById(R.id.buttonValidate);
+        Button buttonValidate = findViewById(R.id.buttonValidate);
 
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                EditText editTextMail = (EditText) findViewById(R.id.editTextMail);
-                EditText editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-
-                MenuItem menu_admin = (MenuItem) findViewById(R.id.menu_admin);
-                MenuItem menu_member = (MenuItem) findViewById(R.id.menu_member);
+                EditText editTextMail = findViewById(R.id.editTextMail);
+                EditText editTextPassword = findViewById(R.id.editTextPassword);
 
                 String mail = editTextMail.getText().toString();
 
@@ -44,8 +41,21 @@ public class LoginActivity extends AppCompatActivity {
 
                     else {
                         //TODO Requête à la base de données pour récupérer l'ID de l'utilisateur
+
+
+
                     }
                 }
+
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                Log.i("RANK", mail);
+
+                editor.putString("rank", mail);
+                editor.apply();
+
+
+                Log.i("RANK", pref.getString("rank", "bug"));
 
                 //TODO A déplacer dans le bloc conditionnel une fois le système de login terminé
                 //setPermissions(mail, menu_admin, menu_member);
@@ -54,32 +64,5 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void setPermissions(String rank, MenuItem menu_admin, MenuItem menu_member) {
-
-
-        Log.i("TITRE",menu_admin.getTitle().toString());
-
-        switch (rank) {
-            case "1":
-                break;
-            case "2":
-                menu_member.setVisible(true);
-                menu_admin.setVisible(false);
-                break;
-            case "3":
-                break;
-            case "4":
-                break;
-            case "5":
-                menu_member.setVisible(true);
-                menu_admin.setVisible(true);
-                break;
-            default :
-                menu_member.setVisible(false);
-                menu_admin.setVisible(false);
-                break;
-        }
     }
 }

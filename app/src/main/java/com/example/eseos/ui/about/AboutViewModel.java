@@ -1,14 +1,14 @@
-package com.example.eseos.ui.apropos;
+package com.example.eseos.ui.about;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-public class AProposViewModel extends ViewModel {
+public class AboutViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public AProposViewModel() {
+    public AboutViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is APropos fragment");
     }

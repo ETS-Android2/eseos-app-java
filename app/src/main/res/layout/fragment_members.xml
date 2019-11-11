@@ -11,26 +11,90 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/ImageViewPhotoClub"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
+            app:srcCompat="@drawable/photo_club_lite"/>
 
         <TextView
-            android:id="@+id/textViewPresident"
+            android:id="@+id/textPresident"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/president"
             android:textColor="#ffffff"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textViewPresidentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/errornoname"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
             app:fontFamily="@font/michroma" />
 
         <TextView
             android:id="@+id/textViewTresorier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="Trésorier"
             android:textColor="#ffffff"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            app:fontFamily="@font/orbitron_medium" />
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textViewTresorierName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/errornoname"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textViewVicePresident"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vice-Président"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textViewVicePresidentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/errornoname"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textViewRespCom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Responsable Com"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/michroma" />
+
+        <TextView
+            android:id="@+id/textRespComName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/errornoname"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            app:fontFamily="@font/michroma" />
     </LinearLayout>
 </ScrollView>
