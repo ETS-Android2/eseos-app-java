@@ -1,11 +1,13 @@
 package com.example.eseos;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                hideSoftKeyboard(v);
 
                 EditText editTextMail = findViewById(R.id.editTextMail);
                 EditText editTextPassword = findViewById(R.id.editTextPassword);
@@ -140,6 +144,15 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             return jsonObject;
+        }
+    }
+
+    public static void hideSoftKeyboard(View view) {
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (inputManager != null) {
+                inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
 }

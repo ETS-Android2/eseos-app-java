@@ -20,6 +20,7 @@ public class PlanningRecyclerViewAdapter extends RecyclerView.Adapter<PlanningRe
     private List<String> hour;
     private List<String> nb_members;
     private List<String> state;
+    private List<Integer> color;
 
     //add this as a new field
 
@@ -58,11 +59,13 @@ public class PlanningRecyclerViewAdapter extends RecyclerView.Adapter<PlanningRe
         holder.hour.setText(hour.get(position));
         holder.nb_members.setText(nb_members.get(position));
         holder.state.setText((state.get(position)));
+        holder.state.setTextColor(color.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        /** Doit absolument retourner le nombre d'items à afficher ET PAS UN VIEUX 0 DE SES MORTS (Nathan ce BG de la street) **/
+        return hour.size();
     }
 
     public void setHour(ArrayList<String> hour) {
@@ -77,8 +80,9 @@ public class PlanningRecyclerViewAdapter extends RecyclerView.Adapter<PlanningRe
         Log.d("DONE","NBMEM DONE");
     }
 
-    public void setState(ArrayList<String> state) {
+    public void setState(ArrayList<String> state,ArrayList<Integer> color) {
         this.state = state;
+        this.color = color;
         notifyDataSetChanged();
         Log.d("DONE","STATE DONE");
     }

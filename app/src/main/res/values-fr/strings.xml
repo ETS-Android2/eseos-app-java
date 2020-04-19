@@ -42,4 +42,12 @@
     <string name="welcome_message">Bienvenue sur l\'appli ESE\'OS. Veuillez vous connecter avec vos identifiants ESEO.</string>
     <string name="validate">Valider</string>
     <string name="com_manager">Responsable Com</string>
+    <string name="member_pural">membres</string>
+    <string name="member_singular">membre</string>
+    <string name="tab_day_1">Aujourd\'hui</string>
+    <string name="tab_day_2">Demain</string>
+    <string name="tab_day_3">Jour 3</string>
+    <string name="any_member">Aucun membre</string>
+    <string name="state_open">Ouvert</string>
+    <string name="state_closed">Fermé</string>
 </resources>

@@ -5,6 +5,6 @@
     <color name="colorAccent">#0572F5</color>
     <color name="colorText">#E6E6E6</color>
 
-    <color name="openingStateFalse">#CC0B0B</color>
-    <color name="openingStateTrue">#0AE00D</color>
+    <color name="RED">#CC0B0B</color>
+    <color name="GREEN">#0AE00D</color>
 </resources>

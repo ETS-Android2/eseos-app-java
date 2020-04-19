@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.eseos.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
@@ -39,15 +37,6 @@ public class PlanningPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.content_planning,container,false);
 
-        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "T'as cru que ça faisait quelque chose mdr ?", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         //Définit la taille et la position du RecyclerView
         RecyclerView planningRecycler = root.findViewById(R.id.recycler_view_planning);
         planningRecycler.setHasFixedSize(true);
@@ -65,27 +54,63 @@ public class PlanningPageFragment extends Fragment {
 
         ArrayList<String> hour = new ArrayList<>();
         for(int i=0;i<25;i++){
-            int heure = 7 + (30*i)/60;
-            int minute = (30*i)%60;
+
+            int hr = 7 + (30*i)/60;
+            String heure = Integer.toString(hr);
+
+            String minute;
+
+            if ((30*i)%60 == 0) {
+                minute = "00";
+            } else {
+                minute = "30";
+            }
+
             hour.add(heure +":"+ minute);
         }
 
         ArrayList<String> nb_members = new ArrayList<>();
         ArrayList<String> status = new ArrayList<>();
+        ArrayList<Integer> color = new ArrayList<>();
         for(int i=0;i<25;i++){
+
+
+            /**
+             * Modifie la syntaxe en fonction du nombre de membres présents
+             */
+
             //TODO getMember()
-            nb_members.add(i + " membres");
-            int nombre_membre = 0;
+            int nombre_membre = i; //Temporaire
+            String nb_members_syntax;
+            switch (nombre_membre) {
+                case 0:
+                    nb_members_syntax = getResources().getString(R.string.any_member);
+                    break;
+                case 1:
+                    nb_members_syntax = "1 " + getResources().getString(R.string.member_singular);
+                    break;
+                default:
+                    nb_members_syntax = nombre_membre + " " + getResources().getString(R.string.member_pural);
+                    break;
+            }
+            nb_members.add(nb_members_syntax);
+
+            /**
+             * Modifie l'état affiché si des membres sont présents ou non
+             */
+
             if (nombre_membre != 0) {
-                status.add("Ouvert");
+                status.add(getResources().getString(R.string.state_open));
+                color.add(getResources().getColor(R.color.GREEN));
             } else {
-                status.add("Fermé");
+                status.add(getResources().getString(R.string.state_closed));
+                color.add(getResources().getColor(R.color.RED));
             }
         }
 
         planningRecyclerViewAdapter.setHour(hour);
         planningRecyclerViewAdapter.setNbMembers(nb_members);
-        planningRecyclerViewAdapter.setState(status);
+        planningRecyclerViewAdapter.setState(status, color);
 
         return root;
     }

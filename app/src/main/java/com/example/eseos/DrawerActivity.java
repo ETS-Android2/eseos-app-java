@@ -44,8 +44,7 @@ public class DrawerActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_client_devis, R.id.nav_profile,
                 R.id.nav_members, R.id.nav_apropos, R.id.nav_inventory,
-                R.id.nav_club_devis, R.id.nav_management, R.id.nav_planning,
-                R.id.nav_planning_test)
+                R.id.nav_club_devis, R.id.nav_management, R.id.nav_planning)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
