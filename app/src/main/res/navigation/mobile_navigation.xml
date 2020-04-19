@@ -53,4 +53,16 @@
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
+    <fragment
+        android:id="@+id/nav_planning"
+        android:name="com.example.eseos.ui.planning.PlanningFragment"
+        android:label="@string/menu_planning"
+        tools:layout="@layout/fragment_planning" />
+
+    <fragment
+        android:id="@+id/nav_planning_test"
+        android:name="com.example.eseos.ui.planning.PlanningPageFragment"
+        android:label="@string/menu_planning"
+        tools:layout="@layout/content_planning" />
+
 </navigation>

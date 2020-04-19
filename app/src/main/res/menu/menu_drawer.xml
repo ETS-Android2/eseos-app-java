@@ -32,13 +32,21 @@
         android:id="@+id/menu_member">
         <menu>
             <item
-                android:id="@+id/nav_inventory"
-                android:icon="@drawable/list"
-                android:title="@string/menu_inventory" />
+                android:id="@+id/nav_planning"
+                android:icon="@drawable/clock"
+                android:title="@string/menu_planning" />
             <item
                 android:id="@+id/nav_club_devis"
                 android:icon="@drawable/document"
                 android:title="@string/menu_club_devis"/>
+            <item
+                android:id="@+id/nav_inventory"
+                android:icon="@drawable/list"
+                android:title="@string/menu_inventory" />
+            <item
+                android:id="@+id/nav_planning_test"
+                android:icon="@drawable/clock"
+                android:title="@string/menu_planning" />
         </menu>
 
     </item>

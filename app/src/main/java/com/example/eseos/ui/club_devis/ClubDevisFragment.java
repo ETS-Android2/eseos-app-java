@@ -1,31 +1,28 @@
 package com.example.eseos.ui.club_devis;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.eseos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class ClubDevisFragment extends Fragment {
 
-    private ClubDevisViewModel clubDevisViewModel;
     private ClubDevisRecyclerViewAdapter clubDevisRecyclerViewAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        clubDevisViewModel =
-                ViewModelProviders.of(this).get(ClubDevisViewModel.class);
         View root = inflater.inflate(R.layout.fragment_club_devis, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);

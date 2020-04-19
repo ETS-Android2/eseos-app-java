@@ -7,37 +7,54 @@ package com.example.eseos;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.util.JsonReader;
 import android.util.Log;
 
-import java.io.BufferedReader;
+import org.json.JSONObject;
+
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-abstract class RetrieveFeedTask extends AsyncTask<Context, Void, String> {
+public class RetrieveFeedTask extends AsyncTask<Context, Void, String> {
 
     private Exception exception;
 
     protected void onPreExecute() {
     }
 
-    protected String doInBackground(Context appContext) {
-        SharedPreferences pref = appContext.getSharedPreferences("MyPref", 0); // 0 - for private mode
-        String email = pref.getString("email","errorNoEmail");
+    protected String doInBackground(Context ... appContext) {
+        SharedPreferences pref = appContext[0].getSharedPreferences("MyPref", 0); // 0 - for private mode
+        String mail = pref.getString("mail","errorNoEmail");
+        String password = pref.getString("password", "ErrorNoPassword");
         // Do some validation here
 
+        Log.i("INFO2","Bonswar");
+        //http://localhost/db_Connect_V2.php
         try {
-            URL url = new URL("https://lien/" + email + "/devis ");
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            Log.i("INFO","I'm alive");
+            String url = new String("http://api-eseos.herokuapp.com/login?identifiant=" + mail + "&hash=" + password);
+            HttpURLConnection urlConnection = (HttpURLConnection) new URL(url).openConnection();
+            Log.i("INFO","I'm fucking alive");
+
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                Log.i("INFO","I'm still alive");
+                JSONObject json = new JSONObject();
+                //String pagename = jobj.getJSONObject().getString();
+                //JSONParser jsonparser = new JSONParser();
+                //jobj = jsonparser.makeHttpRequest(url);
+                //BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
                 String line;
-                while ((line = bufferedReader.readLine()) != null) {
+                Log.i("INFO","Mission passed");
+                JsonReader aled = new JsonReader(new InputStreamReader(urlConnection.getInputStream()));
+                Log.i("INFO","Résultat : " + aled.toString());
+                /*while ((line = bufferedReader.readLine()) != null) {
                     stringBuilder.append(line).append("\n");
+                    Log.i("INFO", stringBuilder.toString());
                 }
-                bufferedReader.close();
-                return stringBuilder.toString();
+                bufferedReader.close();*/
+                return aled.toString();
             }
             finally{
                 urlConnection.disconnect();

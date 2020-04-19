@@ -1,13 +1,17 @@
 package com.example.eseos;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,6 +27,7 @@ public class DrawerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         /*FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +36,7 @@ public class DrawerActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });*/
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -38,7 +44,8 @@ public class DrawerActivity extends AppCompatActivity {
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_client_devis, R.id.nav_profile,
                 R.id.nav_members, R.id.nav_apropos, R.id.nav_inventory,
-                R.id.nav_club_devis, R.id.nav_management)
+                R.id.nav_club_devis, R.id.nav_management, R.id.nav_planning,
+                R.id.nav_planning_test)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -49,6 +56,8 @@ public class DrawerActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
         String rank = pref.getString("rank","0");
+        Log.d("LOGIN", "Aled " + rank);
+        Log.d("LOGIN", "Bonsouare");
 
         switch (rank) {
             case "2":
@@ -71,6 +80,27 @@ public class DrawerActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.drawer, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_settings :
+                break;
+
+            case R.id.action_disconnect :
+                Intent homeIntent = new Intent(DrawerActivity.this,LoginActivity.class);
+                startActivity(homeIntent);
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

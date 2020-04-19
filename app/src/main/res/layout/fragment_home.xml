@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:gravity="center_horizontal"
-        android:text="Nous sommes actuellement :"
+        android:text="@string/home_message"
         android:textColor="@color/colorText"
         android:textSize="20sp"
         android:textAlignment="center"
@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/orbitron_medium"
-        android:text="@string/opening_state"
+        android:text="@string/error_opening_state"
         android:textColor="@color/openingStateFalse"
         android:textSize="24sp"
         android:textStyle="bold" />

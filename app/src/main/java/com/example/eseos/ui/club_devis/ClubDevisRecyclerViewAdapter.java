@@ -1,7 +1,5 @@
 package com.example.eseos.ui.club_devis;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,9 @@ import com.example.eseos.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 public class ClubDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClubDevisRecyclerViewAdapter.DevisRecyclerViewHolder> {
@@ -25,7 +26,7 @@ public class ClubDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClubDevis
 
 
 
-    public ClubDevisRecyclerViewAdapter(com.example.eseos.ui.club_devis.ClubDevisFragment clubDevisFragment){
+    public ClubDevisRecyclerViewAdapter(ClubDevisFragment clubDevisFragment){
         this.clubDevisFragment = clubDevisFragment;
         //TODO: The following lines will be replaced
 
@@ -33,6 +34,7 @@ public class ClubDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClubDevis
         devisName = new ArrayList<>();
         customerName = new ArrayList<>();
         state = new ArrayList<>();
+
         for(int i = 0; i < 20; i++){
            devisName.add(Integer.toString(i));
            customerName.add("");

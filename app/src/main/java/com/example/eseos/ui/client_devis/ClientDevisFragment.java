@@ -1,33 +1,31 @@
 package com.example.eseos.ui.client_devis;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.eseos.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 public class ClientDevisFragment extends Fragment {
 
-    private ClientDevisViewModel clientDevisViewModel;
     private ClientDevisRecyclerViewAdapter clientDevisRecyclerViewAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        clientDevisViewModel =
-                ViewModelProviders.of(this).get(ClientDevisViewModel.class);
         View root = inflater.inflate(R.layout.fragment_client_devis, container, false);
 
+        //Bouton flottant
         FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +40,7 @@ public class ClientDevisFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(this.getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
         devisRecycler.setLayoutManager(llm);
+
         clientDevisRecyclerViewAdapter = new ClientDevisRecyclerViewAdapter(this);
         devisRecycler.setAdapter(clientDevisRecyclerViewAdapter);
 
@@ -54,19 +53,30 @@ public class ClientDevisFragment extends Fragment {
             devisName.add(mSessionManager.getJuryProjectTitle(i));
          */
 
+        String noms[] = new String[]{   "Justin Bieber", "Marc Zuckerberg", "Neo",
+                                        "Donald Trump", "Sylvain Durif", "Mamie"
+                                    };
+
+        String repas[] = new String[]{  "Impuissance", "Vie Privée", "La Matrice",
+                                        "The Great Wall", "Flûte de pan", "Minitel"
+                                    };
+
         ArrayList<String> devisName = new ArrayList<>();
-        for(int i=0;i<20;i++){
-            devisName.add(Integer.toString(i));
+        for(int i=0;i<6;i++){
+            devisName.add(repas[i]);
+            //devisName.add(Integer.toString(i));
 
         }
         ArrayList<String> customerName = new ArrayList<>();
-        for(int i=0;i<20;i++){
-            customerName.add(Integer.toString(i));
+        for(int i=0;i<6;i++){
+            customerName.add(noms[i]);
+            //customerName.add(Integer.toString(i));
             //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
         }
         ArrayList<String> status = new ArrayList<>();
-        for(int i=0;i<20;i++){
-            status.add(Integer.toString(i));
+        for(int i=0;i<6;i++){
+            status.add("Terminé");
+            //status.add(Integer.toString(i));
             //Log.d("POSITION",mSessionManager.getJuryProjectPosition(i));      Debug
         }
 

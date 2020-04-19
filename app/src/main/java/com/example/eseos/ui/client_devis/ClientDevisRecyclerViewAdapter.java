@@ -1,7 +1,5 @@
 package com.example.eseos.ui.client_devis;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +10,13 @@ import com.example.eseos.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class ClientDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClientDevisRecyclerViewAdapter.DevisRecyclerViewHolder> {
 
-    private final com.example.eseos.ui.client_devis.ClientDevisFragment clientDevisFragment;
+public class ClientDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClientDevisRecyclerViewAdapter.ClientDevisRecyclerViewHolder> {
+
+    private final ClientDevisFragment clientDevisFragment;
     private List<String> state;
     private List<String> customerName;
     private List<String> devisName;
@@ -25,15 +26,14 @@ public class ClientDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClientD
 
 
 
-    public ClientDevisRecyclerViewAdapter(com.example.eseos.ui.client_devis.ClientDevisFragment clientDevisFragment){
+    public ClientDevisRecyclerViewAdapter(ClientDevisFragment clientDevisFragment){
         this.clientDevisFragment = clientDevisFragment;
-        //TODO: The following lines will be replaced
 
         //Instanciation des listes
         devisName = new ArrayList<>();
         customerName = new ArrayList<>();
         state = new ArrayList<>();
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i < 6; i++){
            devisName.add(Integer.toString(i));
            customerName.add("");
            state.add("");
@@ -45,17 +45,18 @@ public class ClientDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClientD
 
     @NonNull
     @Override
-    public DevisRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public ClientDevisRecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View sujetView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_devis_item,parent,false);
 
-        return new DevisRecyclerViewHolder(sujetView);
+        return new ClientDevisRecyclerViewHolder(sujetView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DevisRecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ClientDevisRecyclerViewHolder holder, final int position) {
 
-        holder.devisName.setText(customerName.get(position));
-        holder.customerName.setText(state.get(position));
+        holder.devisName.setText(devisName.get(position));
+        holder.customerName.setText(customerName.get(position));
+        holder.state.setText((state.get(position)));
 
         /*if(expandedPositions.contains(position)){
             holder.sujetResume.setVisibility(View.VISIBLE);
@@ -102,14 +103,14 @@ public class ClientDevisRecyclerViewAdapter extends RecyclerView.Adapter<ClientD
         notifyDataSetChanged();
     }
 
-    class DevisRecyclerViewHolder extends RecyclerView.ViewHolder {
+    class ClientDevisRecyclerViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView devisName;
         private final TextView customerName;
         private final TextView state;
 
 
-        public DevisRecyclerViewHolder(@NonNull View itemView) {
+        public ClientDevisRecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
 
             devisName = itemView.findViewById(R.id.textViewNameDevis);

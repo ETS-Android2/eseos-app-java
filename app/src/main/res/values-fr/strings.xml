@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_text">Application officielle du club ESE\'OS.  Développée par :    - Théo RICHETEZ    - Nathan DUBOIS    - Renan MALHERE.</string>
+    <string name="del_member">Supprimer un membre</string>
+    <string name="club_devis_ready">Prêt</string>
+    <string name="club_devis_in_progress">En cours</string>
+    <string name="club_devis_finished">Terminé</string>
+    <string name="club_devis_canceled">Annulé</string>
+    <string name="client_devis_ready">Prêt</string>
+    <string name="client_devis_in_progress">En cours</string>
+    <string name="client_devis_finished">Terminé</string>
+    <string name="client_devis_canceled">Annulé</string>
+    <string name="cancel">Je vérifie une dernière fois</string>
+    <string name="accept">Je passe le flambeau</string>
+    <string name="action_disconnect">Déconnexion</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="add_member">Ajouter un membre</string>
+    <string name="language_change">Changer de langue</string>
+    <string name="members">Membres</string>
+    <string name="menu_about">A propos</string>
+    <string name="menu_client_devis">Mes devis</string>
+    <string name="menu_club_devis">Devis du club</string>
+    <string name="menu_home">Accueil</string>
+    <string name="menu_inventory">Stock</string>
+    <string name="menu_management">Organisation</string>
+    <string name="menu_members">Membres du club</string>
+    <string name="menu_planning">Planning</string>
+    <string name="menu_profile">Mon profil</string>
+    <string name="nathan_bons_plans">Les bons plans de Nathan</string>
+    <string name="new_year">Nouvelle année</string>
+    <string name="news">News</string>
+    <string name="passation_confirmation_text">Es-tu sûr de ton choix ? Tu ne pourras plus le modifier une fois que tu auras accepté.</string>
+    <string name="password_change">Changer de mot de passe</string>
+    <string name="president">Président</string>
+    <string name="theme">Mode clair</string>
+    <string name="tresorier">Trésorier</string>
+    <string name="versionWord">"Version : "</string>
+    <string name="vice_president">Vice-Président</string>
+    <string name="home_message">Nous sommes actuellement :</string>
+    <string name="password_message">Mot de passe</string>
+    <string name="mail_message">Adresse mail</string>
+    <string name="welcome_message">Bienvenue sur l\'appli ESE\'OS. Veuillez vous connecter avec vos identifiants ESEO.</string>
+    <string name="validate">Valider</string>
+    <string name="com_manager">Responsable Com</string>
+</resources>

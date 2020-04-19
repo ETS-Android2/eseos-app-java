@@ -4,55 +4,63 @@
     <string name="version" translatable="false">0.2.1</string>
 
     <!-- Données du Drawer -->
-    <string name="title_activity_drawer">DrawerActivity</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Paramètres</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="title_activity_drawer" translatable="false">DrawerActivity</string>
+    <string name="action_settings">Settings</string>
 
     <!-- Noms des différents fragments dans le Drawer -->
-    <string name="menu_home">Accueil</string>
-    <string name="menu_client_devis">Mes devis</string>
-    <string name="menu_profile">Mon profil</string>
-    <string name="menu_members">Membres du club</string>
-    <string name="menu_about">A propos</string>
-    <string name="menu_club_devis">Devis du club</string>
+    <string name="menu_client_devis">My estimates</string>
+    <string name="menu_profile">My profile</string>
+    <string name="menu_members">Club\'s members</string>
+    <string name="menu_about">About</string>
+    <string name="menu_club_devis">Club\'s estimates</string>
     <string name="menu_inventory">Stock</string>
-    <string name="menu_management">Organisation</string>
+    <string name="menu_management">Management</string>
 
     <!-- Fragment home -->
-    <string name="opening_state">ErrorNoOpeningState</string>
+    <string name="error_opening_state" translatable="false">ErrorNoOpeningState</string>
     <string name="news">News</string>
-    <string name="nathan_bons_plans">Les bons plans de Nathan</string>
+    <string name="nathan_bons_plans">Nathan\'s good pipes</string>
 
     <!-- Fragment client_devis -->
+    <string name="client_devis_canceled">Canceled</string>
+    <string name="client_devis_in_progress">Processing...</string>
+    <string name="client_devis_ready">Ready</string>
+    <string name="client_devis_finished">Done</string>
 
     <!-- Fragment profile -->
-    <string name="password_change">Changer de mot de passe</string>
-    <string name="theme">Mode clair</string>
-    <string name="language_change">Changer de langue</string>
+    <string name="password_change">Change password</string>
+    <string name="theme">Light theme</string>
+    <string name="language_change">Change language</string>
 
     <!-- Fragment members -->
-    <string name="president">Président</string>
-    <string name="vice_president">Vice-Président</string>
-    <string name="tresorier">Trésorier</string>
-    <string name="members">Membres</string>
+    <string name="president">President</string>
+    <string name="vice_president">Vice-President</string>
+    <string name="tresorier">Treasurer</string>
+    <string name="members">Members</string>
+    <string name="error_noname" translatable="false">ErrorNoName</string>
 
-    <string name="errornoname">ErrorNoName</string>
-
+    <!-- Fragment planning -->
+    <string name="tab_day_1">Today</string>
+    <string name="tab_day_2">Tommorow</string>
+    <string name="tab_day_3">Day 3</string>
 
     <!-- Fragment about -->
-    <string name="about_text">Application officielle du club ESE\'OS.\n Développée par :\n   - Théo RICHETEZ\n   - Nathan DUBOIS\n   - Renan MALHERE.</string>
+    <string name="about_text">Official app of ESE\'OS. Developped by :    - Théo RICHETEZ    - Nathan DUBOIS    - Renan MALHERE.</string>
+    <string name="versionWord">Version : </string>
 
     <!-- Fragment inventory -->
 
     <!-- Fragment club_devis -->
+    <string name="club_devis_canceled">Canceled</string>
+    <string name="club_devis_in_progress">Processing…</string>
+    <string name="club_devis_ready">Ready</string>
+    <string name="club_devis_finished">Done</string>
 
     <!-- Fragment management -->
 
     <!-- Tests -->
-    <string name="hellomessage">Bonjour Error</string>
-    <string name="large_text">
+    <string name="error_hellomessage" translatable="false">Bonjour Error</string>
+    <string name="large_text" translatable="false">
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -141,5 +149,21 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="menu_planning">Planning</string>
+    <string name="add_member">Add a member</string>
+    <string name="del_member">Delete a member</string>
+    <string name="new_year">New year</string>
+    <string name="passation_confirmation_text">Are you sure of your choice ? You will not be able to change it once you have accepted.</string>
+    <string name="accept">I pass on the torch</string>
+    <string name="cancel">Let me check once again</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="menu_home">Home</string>
+    <string name="handover" translatable="false">Handover</string>
+    <string name="home_message">We are currently :</string>
+    <string name="welcome_message">Welcome on ESE\'OS app. Please connect with your ESEO account.</string>
+    <string name="password_message">Password</string>
+    <string name="mail_message">Mail adress</string>
+    <string name="validate">Validate</string>
+    <string name="com_manager">Com Manager</string>
 
 </resources>

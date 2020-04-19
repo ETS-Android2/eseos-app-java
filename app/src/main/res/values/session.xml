@@ -1,7 +1,7 @@
 <resources>
-    <string name="username">ErrorNoUsername</string>
-    <string name="role">ErrorNoRole</string>
-    <string name="mail">ErrorNoMailAddress</string>
-    <string name="password">ErrorNoPassword</string>
-    <string name="member_since">ErrorNoMemberSince</string>
+    <string name="error_username" translatable="false">ErrorNoUsername</string>
+    <string name="error_role" translatable="false">ErrorNoRole</string>
+    <string name="error_mail" translatable="false">ErrorNoMailAddress</string>
+    <string name="error_password" translatable="false">ErrorNoPassword</string>
+    <string name="error_member_since" translatable="false">ErrorNoMemberSince</string>
 </resources>
