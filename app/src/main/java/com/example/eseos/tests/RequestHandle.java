@@ -1,4 +1,4 @@
-package com.example.eseos;
+package com.example.eseos.tests;
 
 import android.content.Context;
 import android.content.SharedPreferences;

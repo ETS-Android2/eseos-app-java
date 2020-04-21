@@ -1,4 +1,4 @@
-package com.example.eseos;
+package com.example.eseos.ui.management;
 
 import android.content.Context;
 

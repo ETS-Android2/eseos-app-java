@@ -41,7 +41,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="@string/client_devis_in_progress"
+            android:text="@string/devis_in_progress"
             android:textStyle="bold" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

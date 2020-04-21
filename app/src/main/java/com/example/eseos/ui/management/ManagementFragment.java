@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.eseos.NoticeDialogFragment;
-import com.example.eseos.PassationDialogFragment;
 import com.example.eseos.R;
 
 import androidx.fragment.app.DialogFragment;

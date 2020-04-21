@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         try {
                             if (!result.getString("token").equals("Erreur : votre mot de passe est erroné")) {
+                                //editor.putString("token",result.getString("token"));      Inutile pour le moment
                                 accessConfirmed();
                             } else {
                                 accessDenied();
@@ -85,19 +86,32 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }
-
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                //TODO A déplacer dans le bloc conditionnel une fois le système de login terminé
-                //setPermissions(mail, menu_admin, menu_member);
-
             }
         });
     }
 
     public void accessConfirmed() {
+
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
+
+        JSONObject result = null;
+        try {
+            result = new AsyncInfoUserTask().execute().get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            editor.putString("username",result.getString("prenom") + " " + result.getString("nom"));
+            editor.putString("role", result.getString("rang"));
+            editor.putString("rank", result.getString("rang"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         editor.putString("rank", "5");
         editor.apply();
@@ -112,11 +126,11 @@ public class LoginActivity extends AppCompatActivity {
                 .setAction("Action", null).show();
     }
 
-    public class AsyncLoginTask extends AsyncTask<String, Void, JSONObject> {
+    public class AsyncLoginTask extends AsyncTask<Void, Void, JSONObject> {
         private String urlStart = "https://api-eseos.herokuapp.com/login?identifiant=";
 
         @Override
-        protected JSONObject doInBackground(String... strings) {
+        protected JSONObject doInBackground(Void... voids) {
             JSONObject jsonObject = new JSONObject();
 
             SharedPreferences pref = getApplication().getSharedPreferences("MyPref", 0); // 0 - for private mode
@@ -153,6 +167,34 @@ public class LoginActivity extends AppCompatActivity {
             if (inputManager != null) {
                 inputManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
+        }
+    }
+
+    public static class AsyncInfoUserTask extends AsyncTask<Void, Void, JSONObject> {
+        private String urlStart = "https://api-eseos.herokuapp.com/user?id=";
+
+        @Override
+        protected JSONObject doInBackground(Void... voids) {
+            JSONObject jsonObject = new JSONObject();
+
+            URL url;
+            try {
+                url = new URL(urlStart+"2");    //Remplacer le "2" par le mail ou le token
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                InputStream in = urlConnection.getInputStream();
+                StringWriter writer = new StringWriter();
+                IOUtils.copy(in, writer, "UTF-8");
+                String result = writer.toString();
+                jsonObject = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return jsonObject;
         }
     }
 }

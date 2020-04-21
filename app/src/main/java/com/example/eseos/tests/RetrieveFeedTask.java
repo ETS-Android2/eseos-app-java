@@ -2,7 +2,7 @@
 //A moins que vous n'ayez une meilleure solution
 //Solution viable, en attente de l'API de Renan
 
-package com.example.eseos;
+package com.example.eseos.tests;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -7,7 +7,7 @@
     <string name="club_devis_finished">Terminé</string>
     <string name="club_devis_canceled">Annulé</string>
     <string name="client_devis_ready">Prêt</string>
-    <string name="client_devis_in_progress">En cours</string>
+    <string name="devis_in_progress">En cours</string>
     <string name="client_devis_finished">Terminé</string>
     <string name="client_devis_canceled">Annulé</string>
     <string name="cancel">Je vérifie une dernière fois</string>

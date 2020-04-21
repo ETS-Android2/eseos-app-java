@@ -1,9 +1,11 @@
-package com.example.eseos;
+package com.example.eseos.ui.management;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import com.example.eseos.R;
 
 import androidx.fragment.app.DialogFragment;
 

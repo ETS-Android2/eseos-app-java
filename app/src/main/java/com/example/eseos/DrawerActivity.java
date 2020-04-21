@@ -55,8 +55,6 @@ public class DrawerActivity extends AppCompatActivity {
 
         SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref",MODE_PRIVATE);
         String rank = pref.getString("rank","0");
-        Log.d("LOGIN", "Aled " + rank);
-        Log.d("LOGIN", "Bonsouare");
 
         switch (rank) {
             case "2":
