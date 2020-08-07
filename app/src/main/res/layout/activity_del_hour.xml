@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".ui.planning.fabMenu.DelHourActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textViewDelHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appbar"
+        android:text="Choisissez vos horaires à supprimer"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:layout_marginVertical="20dp"
+        android:layout_centerHorizontal="true"
+        />
+    <!-- Idée du spinner>
+    <Spinner
+        android:id="@+id/spinner_del_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDelHour"
+        android:layout_centerHorizontal="true"/>
+    <-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_del_hour"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textViewDelHour"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="60dp"
+        android:padding="10dp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_check"
+        android:background="@drawable/accent_background_gradient"
+        android:tint="#FFFFFFFF"
+        app:backgroundTint="#009FFF"
+        app:borderWidth="4dp"
+        app:fabSize="auto"
+        app:rippleColor="#80FFFFFF"/>
+</RelativeLayout>

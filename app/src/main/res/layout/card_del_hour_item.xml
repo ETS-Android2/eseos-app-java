@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:padding="10dp"
+    app:contentPadding="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/checkBoxDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="CheckBox"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@+id/hour_end"
+            />
+
+        <TextView
+            android:id="@+id/hour_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="DEBUT"/>
+
+        <TextView
+            android:id="@+id/hour_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignLeft="@+id/hour_start"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/hour_start"
+            android:text="FIN"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

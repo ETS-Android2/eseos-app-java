@@ -1,12 +1,12 @@
 <resources>
     <!-- Informations de l'application -->
     <string name="app_name" translatable="false">ESE\'OS</string>
-    <string name="version" translatable="false">0.2.3</string>
+    <string name="version" translatable="false">0.2.4</string>
 
     <!-- Login -->
     <string name="welcome_message">Welcome on ESE\'OS app. Please connect with your ESEO account.</string>
     <string name="password_message">Password</string>
-    <string name="mail_message">Mail adress</string>
+    <string name="mail_message">Mail address</string>
     <string name="validate">Validate</string>
 
     <!-- Données du Drawer -->
@@ -33,7 +33,7 @@
 
     <!-- Fragment client_devis -->
     <string name="client_devis_canceled">Canceled</string>
-    <string name="devis_in_progress">Processing...</string>
+    <string name="devis_in_progress">Processing…</string>
     <string name="client_devis_ready">Ready</string>
     <string name="client_devis_finished">Done</string>
 
@@ -51,7 +51,7 @@
 
     <!-- Fragment planning -->
     <string name="tab_day_1">Today</string>
-    <string name="tab_day_2">Tommorow</string>
+    <string name="tab_day_2">Tomorrow</string>
     <string name="tab_day_3">Day 3</string>
     <string name="any_member">Any member</string>
     <string name="member_singular">member</string>
@@ -60,7 +60,7 @@
     <string name="state_closed">Closed</string>
 
     <!-- Fragment about -->
-    <string name="about_text">Official app of ESE\'OS. Developped by :    - Théo RICHETEZ    - Nathan DUBOIS    - Renan MALHERE.</string>
+    <string name="about_text">Official app of ESE\'OS. Developed by :    - Théo RICHETEZ    - Nathan DUBOIS    - Renan MALHERE.</string>
     <string name="versionWord">Version : </string>
 
     <!-- Fragment inventory -->
@@ -87,7 +87,6 @@
     <string name="error_noname" translatable="false">ErrorNoName</string>
     <string name="error_opening_state" translatable="false">ErrorNoOpeningState</string>
     <string name="error_hellomessage" translatable="false">Bonjour Error</string>
-
 
 
     <!-- Tests -->
@@ -180,4 +179,8 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="title_activity_add_hour">AddHourActivity</string>
+    <string name="textviewHourStart">Hour Start</string>
+    <string name="textviewHourEnd">Hour End</string>
+    <string name="title_activity_del_hour">DelHourActivity</string>
 </resources>
