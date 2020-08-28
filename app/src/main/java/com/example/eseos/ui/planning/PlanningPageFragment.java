@@ -1,14 +1,29 @@
 package com.example.eseos.ui.planning;
 
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.eseos.R;
 
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +32,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class PlanningPageFragment extends Fragment {
+
+    private PlanningRecyclerViewAdapter planningRecyclerViewAdapter;
+    ProgressBar progressBar;
+    RecyclerView planningRecycler;
+
 
     public static PlanningPageFragment newInstance(int position) {
 
@@ -27,7 +47,6 @@ public class PlanningPageFragment extends Fragment {
         return fragment;
     }
 
-    private PlanningRecyclerViewAdapter planningRecyclerViewAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,8 +56,11 @@ public class PlanningPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.content_planning,container,false);
 
+        //Initialisation du loading logo
+        progressBar = root.findViewById(R.id.progressBarPlanning);
+
         //Définit la taille et la position du RecyclerView
-        RecyclerView planningRecycler = root.findViewById(R.id.recycler_view_planning);
+        planningRecycler = root.findViewById(R.id.recycler_view_planning);
         planningRecycler.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this.getActivity());
         llm.setOrientation(RecyclerView.VERTICAL);
@@ -46,72 +68,109 @@ public class PlanningPageFragment extends Fragment {
 
         //Instanciation du modèle (Adapter)
         planningRecyclerViewAdapter = new PlanningRecyclerViewAdapter(this);
-        planningRecycler.setAdapter(planningRecyclerViewAdapter);
 
+        //On récupère les infos du jour à afficher
+        int position = this.getArguments().getInt("PAGE_NUMBER");
 
-        //Instanciation des listes d'éléments à afficher
-        // [Les listes sont bonnes]
+        ManageCalendar manageCalendar = new ManageCalendar();
+        Date date = manageCalendar.nextDates(getContext().getResources().getString(R.string.closed_days))[position];
 
-        ArrayList<String> hour = new ArrayList<>();
-        for(int i=0;i<25;i++){
-
-            int hr = 7 + (30*i)/60;
-            String heure = Integer.toString(hr);
-
-            String minute;
-
-            if ((30*i)%60 == 0) {
-                minute = "00";
-            } else {
-                minute = "30";
-            }
-
-            hour.add(heure +":"+ minute);
-        }
-
-        ArrayList<String> nb_members = new ArrayList<>();
-        ArrayList<String> status = new ArrayList<>();
-        ArrayList<Integer> color = new ArrayList<>();
-        for(int i=0;i<25;i++){
-
-
-            /**
-             * Modifie la syntaxe en fonction du nombre de membres présents
-             */
-
-            //TODO getMember()
-            int nombre_membre = i; //Temporaire
-            String nb_members_syntax;
-            switch (nombre_membre) {
-                case 0:
-                    nb_members_syntax = getResources().getString(R.string.any_member);
-                    break;
-                case 1:
-                    nb_members_syntax = "1 " + getResources().getString(R.string.member_singular);
-                    break;
-                default:
-                    nb_members_syntax = nombre_membre + " " + getResources().getString(R.string.member_pural);
-                    break;
-            }
-            nb_members.add(nb_members_syntax);
-
-            /**
-             * Modifie l'état affiché si des membres sont présents ou non
-             */
-
-            if (nombre_membre != 0) {
-                status.add(getResources().getString(R.string.state_open));
-                color.add(getResources().getColor(R.color.GREEN));
-            } else {
-                status.add(getResources().getString(R.string.state_closed));
-                color.add(getResources().getColor(R.color.RED));
-            }
-        }
-
-        planningRecyclerViewAdapter.setHour(hour);
-        planningRecyclerViewAdapter.setNbMembers(nb_members);
-        planningRecyclerViewAdapter.setState(status, color);
+        new AsyncGetHorairesDate(getContext()).execute(date);
 
         return root;
+    }
+
+
+
+    class AsyncGetHorairesDate extends AsyncTask<Date, Void, Void>    {
+        //TODO Finir la requête
+        private String urlStart = "https://api-eseos.herokuapp.com/";
+        private Context mContext;
+
+        public AsyncGetHorairesDate (Context context){
+            mContext = context;
+        }
+
+        protected void onPostExecute(Void res) {
+            super.onPostExecute(null);
+
+            progressBar.setVisibility(View.GONE);
+            planningRecycler.setAdapter(planningRecyclerViewAdapter);
+        }
+
+        @Override
+        public Void doInBackground(Date... dates) {
+            JSONObject jsonObject;
+
+            URL url;
+            try {
+                url = new URL(urlStart+"2");    //Remplacer le "2" par le mail ou le token
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                InputStream in = urlConnection.getInputStream();
+                StringWriter writer = new StringWriter();
+                IOUtils.copy(in, writer, "UTF-8");
+                String result = writer.toString();
+                jsonObject = new JSONObject(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //Instanciation des listes d'éléments à afficher
+            // [Les listes sont bonnes]
+
+            ArrayList<String> hour = new ArrayList<>();
+            ArrayList<String> nb_members = new ArrayList<>();
+            ArrayList<String> status = new ArrayList<>();
+            ArrayList<Integer> color = new ArrayList<>();
+
+            for(int i=0;i<25;i++){
+
+                hour.add(Integer.toString(i)); //jsonObject.getJSONArray("hours").getString(i));
+
+
+                /**
+                 * Modifie la syntaxe en fonction du nombre de membres présents
+                 */
+
+                int nombre_membre = i; //jsonObject.getJSONArray("nbMembers").getInt(i);
+                String nb_members_syntax;
+
+                switch (nombre_membre) {
+                    case 0:
+                        nb_members_syntax = mContext.getResources().getString(R.string.any_member);
+                        break;
+                    case 1:
+                        nb_members_syntax = "1 " + mContext.getResources().getString(R.string.member_singular);
+                        break;
+                    default:
+                        nb_members_syntax = nombre_membre + " " + mContext.getResources().getString(R.string.member_pural);
+                        break;
+                }
+                nb_members.add(nb_members_syntax);
+
+                /**
+                 * Modifie l'état affiché si des membres sont présents ou non
+                 */
+
+                if (nombre_membre != 0) {
+                    status.add(mContext.getResources().getString(R.string.state_open));
+                    color.add(mContext.getResources().getColor(R.color.GREEN));
+                } else {
+                    status.add(mContext.getResources().getString(R.string.state_closed));
+                    color.add(mContext.getResources().getColor(R.color.RED));
+                }
+
+            }
+
+            planningRecyclerViewAdapter.setHour(hour);
+            planningRecyclerViewAdapter.setNbMembers(nb_members);
+            planningRecyclerViewAdapter.setState(status, color);
+
+            return null;
+        }
     }
 }

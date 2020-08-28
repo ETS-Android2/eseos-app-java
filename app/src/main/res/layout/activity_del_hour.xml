@@ -28,20 +28,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/appbar"
-        android:text="Choisissez vos horaires à supprimer"
+        android:text="@string/del_hour_text"
         android:textColor="@color/colorText"
         android:textSize="20sp"
         android:layout_marginVertical="20dp"
         android:layout_centerHorizontal="true"
         />
-    <!-- Idée du spinner>
-    <Spinner
-        android:id="@+id/spinner_del_hour"
+
+    <ProgressBar
+        android:id="@+id/progressBarHours"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textViewDelHour"
-        android:layout_centerHorizontal="true"/>
-    <-->
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_del_hour"
@@ -51,6 +52,15 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="60dp"
         android:padding="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarDelHour"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/recycler_view_del_hour"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabValidate"

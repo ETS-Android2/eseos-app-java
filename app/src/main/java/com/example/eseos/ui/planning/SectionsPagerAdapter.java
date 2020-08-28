@@ -1,11 +1,14 @@
 package com.example.eseos.ui.planning;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.eseos.R;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
@@ -15,13 +18,24 @@ import androidx.fragment.app.FragmentPagerAdapter;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_day_1, R.string.tab_day_2, R.string.tab_day_3};
+
+    private static String[] TAB_TITLES = new String[]{"Today", "Tomorrow", "Day 3"};
     private final Context mContext;
+    private Calendar calendar;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         mContext = context;
+        calendar = Calendar.getInstance();
+        Log.d("CALENDAR",calendar.getTime().toString());
+        ManageCalendar manageCalendar = new ManageCalendar();
+
+        String closed_days = mContext.getResources().getString(R.string.closed_days);
+        String today = mContext.getResources().getString(R.string.tab_day_today);
+        String tomorrow = mContext.getResources().getString(R.string.tab_day_tomorrow);
+
+
+        TAB_TITLES = manageCalendar.nextDays(closed_days, today, tomorrow);
     }
 
     @Override
@@ -48,7 +62,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+        return TAB_TITLES[position];
     }
 
     @Override

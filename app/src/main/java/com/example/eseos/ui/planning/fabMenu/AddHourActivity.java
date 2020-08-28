@@ -1,28 +1,55 @@
 package com.example.eseos.ui.planning.fabMenu;
 
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.example.eseos.R;
 
+import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.StringWriter;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.ExecutionException;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class AddHourActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    String hourStart, hourEnd;
-
+    String date, hourStart, hourEnd;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +57,10 @@ public class AddHourActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_add_hour);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        progressBar = findViewById(R.id.progressBarAddHour);
+
+        final CalendarView calendarView = findViewById(R.id.calendarView);
 
         final Spinner start_spinner = findViewById(R.id.spinnerHourStart);
         Spinner end_spinner = findViewById(R.id.spinnerHourEnd);
@@ -49,15 +80,34 @@ public class AddHourActivity extends AppCompatActivity implements AdapterView.On
 
         end_spinner.setAdapter(arrayAdapterEnd);
 
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
+                date = month + "/" + dayOfMonth + "/" + year;
+            }
+        });
+
         FloatingActionButton fabValidate = findViewById(R.id.fabValidate);
         fabValidate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                //Get infos entrées
 
-                finish();
+                try {
+                    int result = new AsyncAddHour().execute(date, hourStart, hourEnd).get();
+                    if(result == 0) {
+                        Toast.makeText(AddHourActivity.this, R.string.add_hour_succes, Toast.LENGTH_SHORT).show();
+                        finish();
+
+                    } else {
+                        Snackbar.make(view, R.string.error_snackbar, Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -73,6 +123,85 @@ public class AddHourActivity extends AppCompatActivity implements AdapterView.On
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
 
+    class AsyncAddHour extends AsyncTask<String, Void, Integer> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Integer doInBackground(String... strings) {
+            String urlStart = "https://api-eseos.herokuapp.com/addHour?";
+            URL url;
+            JSONObject jsonObject;
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
+            pref.getString("ID","2"); //TODO Remplacer le 2 une fois terminé
+            ArrayList<String> hours = new ArrayList<>();
+
+            //TODO Vérifier que hourEnd est plus grand que hourStart
+            //hourEnd.compareTo(hourStart);
+
+            hourStart += ":00";
+            hourEnd += ":00";
+
+            while (!hourStart.equals(hourEnd)) {
+                hours.add(hourStart);
+                if(hourStart.endsWith("00:00")) {
+                    hourStart = hourStart.split(":")[0] + ":30:00";
+                } else {
+                    int hr = Integer.parseInt(hourStart.split(":")[0])+1;
+                    hourStart = hr + ":00:00";
+                }
+            }
+
+            for(String hour : hours) {
+                try {
+                    url = new URL(urlStart + "date="  + strings[0] + "&idUser=2" + "&hour=" + hour);    //TODO Remplacer le 2 par [ID]
+                    HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                    urlConnection.setRequestProperty("Accept","application/json");
+                    urlConnection.setDoOutput(true);
+
+                    /*JSONObject jsonParam = new JSONObject();
+
+                    DataOutputStream os = new DataOutputStream(urlConnection.getOutputStream());
+                    //os.writeBytes(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                    os.writeBytes(jsonParam.toString());
+
+                    os.flush();
+                    os.close();*/
+
+                    urlConnection.disconnect();
+                    /*InputStream in = urlConnection.getInputStream();
+                    StringWriter writer = new StringWriter();
+                    IOUtils.copy(in, writer, "UTF-8");
+                    String result = writer.toString();
+                    jsonObject = new JSONObject(result);
+                } catch (
+                        JSONException e) {
+                    e.printStackTrace();*/ //Pas utile pour le moment
+                } catch (
+                        MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (
+                        IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return 0;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            progressBar.setVisibility(View.GONE);
+        }
     }
 }

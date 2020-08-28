@@ -44,12 +44,18 @@
     <string name="com_manager">Responsable Com</string>
     <string name="member_pural">membres</string>
     <string name="member_singular">membre</string>
-    <string name="tab_day_1">Aujourd\'hui</string>
-    <string name="tab_day_2">Demain</string>
-    <string name="tab_day_3">Jour 3</string>
+    <string name="tab_day_today">Aujourd\'hui</string>
+    <string name="tab_day_tomorrow">Demain</string>
     <string name="any_member">Aucun membre</string>
     <string name="state_open">Ouvert</string>
     <string name="state_closed">Fermé</string>
     <string name="textviewHourEnd">Heure de fin</string>
     <string name="textviewHourStart">Heure de départ</string>
+    <string name="closed_days">SamediDimanche</string>
+    <string name="title_activity_add_hour">Ajouter une permanence</string>
+    <string name="title_activity_del_hour">Supprimer une permanence</string>
+    <string name="add_hour_succes">Permanences ajoutées !</string>
+    <string name="del_hour_succes">Permanences supprimées !</string>
+    <string name="error_snackbar">Une erreur est survenue. Veuillez réessayer</string>
+    <string name="del_hour_text">Choisissez vos horaires à supprimer</string>
 </resources>
