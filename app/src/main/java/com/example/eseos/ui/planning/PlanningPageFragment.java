@@ -3,7 +3,9 @@ package com.example.eseos.ui.planning;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ProgressBar;
 import com.example.eseos.R;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,6 +30,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -73,7 +77,7 @@ public class PlanningPageFragment extends Fragment {
         int position = this.getArguments().getInt("PAGE_NUMBER");
 
         ManageCalendar manageCalendar = new ManageCalendar();
-        Date date = manageCalendar.nextDates(getContext().getResources().getString(R.string.closed_days))[position];
+        String date = manageCalendar.nextDates(getContext().getResources().getString(R.string.closed_days))[position];
 
         new AsyncGetHorairesDate(getContext()).execute(date);
 
@@ -82,9 +86,9 @@ public class PlanningPageFragment extends Fragment {
 
 
 
-    class AsyncGetHorairesDate extends AsyncTask<Date, Void, Void>    {
+    class AsyncGetHorairesDate extends AsyncTask<String, Void, Void>    {
         //TODO Finir la requête
-        private String urlStart = "https://api-eseos.herokuapp.com/";
+        private String urlStart = "https://api-eseos.herokuapp.com/getPlanningDate?date=";
         private Context mContext;
 
         public AsyncGetHorairesDate (Context context){
@@ -98,19 +102,20 @@ public class PlanningPageFragment extends Fragment {
             planningRecycler.setAdapter(planningRecyclerViewAdapter);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
-        public Void doInBackground(Date... dates) {
-            JSONObject jsonObject;
+        public Void doInBackground(String... dates) {
+            JSONArray jsonArray = new JSONArray();
 
             URL url;
             try {
-                url = new URL(urlStart+"2");    //Remplacer le "2" par le mail ou le token
+                url = new URL(urlStart+dates[0]);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 InputStream in = urlConnection.getInputStream();
                 StringWriter writer = new StringWriter();
                 IOUtils.copy(in, writer, "UTF-8");
                 String result = writer.toString();
-                jsonObject = new JSONObject(result);
+                jsonArray = new JSONArray(result);
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (MalformedURLException e) {
@@ -127,30 +132,45 @@ public class PlanningPageFragment extends Fragment {
             ArrayList<String> status = new ArrayList<>();
             ArrayList<Integer> color = new ArrayList<>();
 
-            for(int i=0;i<25;i++){
-
-                hour.add(Integer.toString(i)); //jsonObject.getJSONArray("hours").getString(i));
+            Log.d("PLANNING",jsonArray.toString());
 
 
-                /**
-                 * Modifie la syntaxe en fonction du nombre de membres présents
-                 */
 
-                int nombre_membre = i; //jsonObject.getJSONArray("nbMembers").getInt(i);
-                String nb_members_syntax;
+            for(String i : getContext().getResources().getStringArray(R.array.horaires_start)){
+                String hour_DB = "";
+                String nb_members_syntax = mContext.getResources().getString(R.string.any_member);
+                int nombre_membre = 0;
 
-                switch (nombre_membre) {
-                    case 0:
-                        nb_members_syntax = mContext.getResources().getString(R.string.any_member);
-                        break;
-                    case 1:
-                        nb_members_syntax = "1 " + mContext.getResources().getString(R.string.member_singular);
-                        break;
-                    default:
-                        nb_members_syntax = nombre_membre + " " + mContext.getResources().getString(R.string.member_pural);
-                        break;
+                //Log.d("PLANNING",i + " AND " + hour_DB);
+                hour.add(i); //On ajoute la première heure à la liste
+                for(int j = 0; j < jsonArray.length(); j++) { //On teste tous les créneaux de la DB pour voir si l'un d'entre eux correspond à l'horaire entrée au dessus
+                    try {
+                        hour_DB = jsonArray.getJSONObject(j).getString("creneau").replaceAll("'", "").substring(0,5); //On récupère l'horaire de la DB
+                        if (hour_DB.startsWith("0")) {
+                            hour_DB = hour_DB.substring(1);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d("PLANNING",i + " AND " + hour_DB);
+                    if (i.equals(hour_DB)) { //Si on trouve une correspondance :
+                        try {
+                            nombre_membre = jsonArray.getJSONObject(j).getInt("nbmembres"); //On récupère le nombre de membres présents sur ce créneau
+                            jsonArray.remove(j); //On supprime le créneau une fois qu'on l'a utilisé pour limiter le nombre d'itérations dans la prochaine boucle
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        /**
+                         * Modifie la syntaxe en fonction du nombre de membres présents
+                         */
+                        //On associe la bonne grammaire en fonction du nombre de membres présents
+                        if (nombre_membre == 1) {
+                            nb_members_syntax = "1 " + mContext.getResources().getString(R.string.member_singular);
+                        } else {
+                            nb_members_syntax = nombre_membre + " " + mContext.getResources().getString(R.string.member_pural);
+                        }
+                    }
                 }
-                nb_members.add(nb_members_syntax);
 
                 /**
                  * Modifie l'état affiché si des membres sont présents ou non
@@ -164,6 +184,8 @@ public class PlanningPageFragment extends Fragment {
                     color.add(mContext.getResources().getColor(R.color.RED));
                 }
 
+                nb_members.add(nb_members_syntax);
+                Log.d("PLANNING", nb_members_syntax);
             }
 
             planningRecyclerViewAdapter.setHour(hour);

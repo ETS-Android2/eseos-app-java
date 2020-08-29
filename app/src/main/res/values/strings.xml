@@ -1,7 +1,7 @@
 <resources>
     <!-- Informations de l'application -->
     <string name="app_name" translatable="false">ESE\'OS</string>
-    <string name="version" translatable="false">0.2.4</string>
+    <string name="version" translatable="false">0.2.6</string>
 
     <!-- Login -->
     <string name="welcome_message">Welcome on ESE\'OS app. Please connect with your ESEO account.</string>
@@ -59,11 +59,15 @@
     <string name="state_closed">Closed</string>
     <string name="closed_days">SaturdaySunday</string>
 
+
     <string name="title_activity_add_hour">Add a duty</string>
     <string name="textviewHourStart">Departure time</string>
     <string name="textviewHourEnd">End time</string>
+    <string name="add_hour_succes">Duties added succesfully</string>
 
     <string name="title_activity_del_hour">Remove a duty</string>
+    <string name="del_hour_succes">Duties deleted succesfully</string>
+    <string name="del_hour_text">Choose duties you want to delete</string>
 
     <!-- Fragment about -->
     <string name="about_text">Official app of ESE\'OS. Developed by :    - Théo RICHETEZ    - Nathan DUBOIS    - Renan MALHERE.</string>
@@ -93,6 +97,8 @@
     <string name="error_noname" translatable="false">ErrorNoName</string>
     <string name="error_opening_state" translatable="false">ErrorNoOpeningState</string>
     <string name="error_hellomessage" translatable="false">Bonjour Error</string>
+
+    <string name="error_snackbar">An error has occured. Please try again</string>
 
 
     <!-- Tests -->
@@ -185,9 +191,4 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="error_snackbar">An error has occured. Please try again</string>
-    <string name="add_hour_succes">Duties added succesfully</string>
-    <string name="del_hour_succes">Duties deleted succesfully</string>
-    <string name="del_hour_text">Choose duties you want to delete</string>
-
 </resources>

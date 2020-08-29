@@ -196,9 +196,14 @@ public class LoginActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             JSONObject jsonObject = new JSONObject();
 
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+
+            String ID_user = pref.getString("ID","ErrorNoID");
+
             URL url;
             try {
-                url = new URL(urlStart+"2");    //TODO Remplacer le "2" par le mail ou le token
+                url = new URL(urlStart + ID_user);
                 Log.d("LOGIN",url.toString());
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 InputStream in = urlConnection.getInputStream();
@@ -213,9 +218,6 @@ public class LoginActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
-            SharedPreferences.Editor editor = pref.edit();
 
             try {
                 editor.putString("username",jsonObject.getString("prenom") + " " + jsonObject.getString("nom"));

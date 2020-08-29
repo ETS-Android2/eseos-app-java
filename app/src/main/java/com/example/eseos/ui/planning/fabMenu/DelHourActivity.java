@@ -128,12 +128,14 @@ public class DelHourActivity extends AppCompatActivity implements AdapterView.On
         protected Void doInBackground(String... strings) {
             String urlStart = "https://api-eseos.herokuapp.com/getPlanningMember?idUser=";
             URL url;
-            JSONObject jsonObject;
             JSONArray jsonArray;
+
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE); // 0 - for private mode
+            String ID_user = pref.getString("ID","ErrorNoID");
 
             try {
 
-                url = new URL(urlStart + "2");    //TODO Remplacer le "2" par l'ID ou le token
+                url = new URL(urlStart + ID_user);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 InputStream in = urlConnection.getInputStream();
                 StringWriter writer = new StringWriter();
@@ -178,8 +180,9 @@ public class DelHourActivity extends AppCompatActivity implements AdapterView.On
             progressBarValidate.setVisibility(View.VISIBLE);
         }
 
+        @SafeVarargs
         @Override
-        protected Void doInBackground(ArrayList<String>... array_strings) {
+        protected final Void doInBackground(ArrayList<String>... array_strings) {
             String urlStart = "https://api-eseos.herokuapp.com/deleteHour?";
             URL url;
             JSONObject jsonObject;
@@ -191,18 +194,13 @@ public class DelHourActivity extends AppCompatActivity implements AdapterView.On
 
             for(int i = 0; i < array_strings[0].size(); i++) {
                 try {
-                    url = new URL(urlStart + "date=" + deleted_dates.get(i) + "&idUser=" + ID_user + "&hour=" + deleted_hours.get(i));    //Remplacer le "" par [ID + date + heure]
+                    url = new URL(urlStart + "date=" + deleted_dates.get(i) + "&idUser=" + ID_user + "&hour=" + deleted_hours.get(i));
                     Log.d("DELHOUR", url.toString());
                     HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                     urlConnection.setRequestMethod("DELETE");
-                    urlConnection.connect();
-
-                    /*InputStream in = urlConnection.getInputStream();
+                    InputStream in = urlConnection.getInputStream();
                     StringWriter writer = new StringWriter();
                     IOUtils.copy(in, writer, "UTF-8");
-                    String result = writer.toString();
-                    jsonObject = new JSONObject(result);*/
-
 
                 } catch (
                         MalformedURLException e) {
