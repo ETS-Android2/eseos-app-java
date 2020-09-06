@@ -1,7 +1,7 @@
 <resources>
     <!-- Informations de l'application -->
     <string name="app_name" translatable="false">ESE\'OS</string>
-    <string name="version" translatable="false">0.2.6</string>
+    <string name="version" translatable="false">0.3.0</string>
 
     <!-- Login -->
     <string name="welcome_message">Welcome on ESE\'OS app. Please connect with your ESEO account.</string>

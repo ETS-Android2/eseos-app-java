@@ -24,6 +24,9 @@ import java.io.InputStream;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -43,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final Activity mActivity = this;
-        final Context mContext = getApplicationContext();
 
         Button buttonValidate = findViewById(R.id.buttonValidate);
         progressBar = findViewById(R.id.progressBarLogin);
@@ -127,8 +129,37 @@ public class LoginActivity extends AppCompatActivity {
             String mail = pref.getString("mail", "errorNoEmail");
             String password = pref.getString("password", "ErrorNoPassword");
 
-            urlStart += mail + "&hash=" + password; //On forme l'URL pour la requête
-            Log.d("LOGIN",urlStart);                        //TEST
+            /**
+             * Hash du mot de passe
+             */
+            byte[] salt = new byte[0];
+            try {
+                salt = getSalt();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+
+            String generatedPassword = null;
+            try {
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(salt);
+                byte[] bytes = md.digest(password.getBytes());
+                StringBuilder sb = new StringBuilder();
+                for(int i=0; i< bytes.length ;i++)
+                {
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                }
+                generatedPassword = sb.toString();
+            }
+            catch (NoSuchAlgorithmException e)
+            {
+                e.printStackTrace();
+            }
+
+            /**
+             * Création de l'URL et requête
+             */
+            urlStart += mail + "&hash=" + generatedPassword; //On forme l'URL pour la requête
 
             try {
 
@@ -166,6 +197,14 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(null);
             Log.d("LOGIN","AsyncLogin terminé !");
             progressBar.setVisibility(View.GONE);
+        }
+
+        private byte[] getSalt() throws NoSuchAlgorithmException
+        {
+            SecureRandom sr = SecureRandom.getInstance("SHA-256");
+            byte[] salt = new byte[16];
+            sr.nextBytes(salt);
+            return salt;
         }
     }
 
